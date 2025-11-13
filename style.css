@@ -41,7 +41,7 @@ body {
   /*! flex: 1; */
   justify-content: center;
   align-items: center;
-  margin-bottom: 3vh;
+  margin: 3vh 0;
 }
 
 .dvText > div{
@@ -124,7 +124,7 @@ body {
 
 .card-info .dvInfo > div {
   padding: 1em 0;
-  margin: 0 0 0 2em;
+  margin: 0 0 0 1em;
   color: #555;
 }
 
@@ -133,16 +133,31 @@ body {
 }
 
 .card-info .dvTools{
-  padding: 1em 2em;
+  padding: 1em;
   text-align: center;
 }
 
 .card-info .dvTools > div:not(:last-child){
-  margin-bottom: 1em;
+  margin-bottom: 1.2em;
 }
+
 
 .text-gradient {
   background: linear-gradient(90deg, #c192f5, #86c3eb);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.card-info .dvTools #btnAll{
+  position: relative;
+}
+
+.card-info .dvTools #btnAll div{
+  position: absolute;
+  bottom: 68%;
+  left: 0;
+  right: 0;
+  font-weight: bold;
+  font-size: 0.9em;
+  color: red;
 }
