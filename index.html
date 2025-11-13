@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 
+ 	<link rel="stylesheet" href="note.css">
  	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -40,18 +41,18 @@
 				  <line x1="3" y1="10" x2="21" y2="10" stroke="#86c3eb"/>
 				</svg>
 			</div>
-			<div id="btnNote">
+			<div id="btnNote" class="openSheet">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 				  <path d="M12 20h9" stroke="#c192f5"/>
 				  <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" stroke="#86c3eb"/>
 				</svg>
 			</div>
-			<div id="btnAll">
+			<div id="btnAll" class="openSheet">
 				<div>5</div>
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-				  <circle cx="5" cy="12" r="1.5" stroke="#c192f5" fill="#c192f5"/>
-				  <circle cx="12" cy="12" r="1.5" stroke="#86c3eb" fill="#86c3eb"/>
-				  <circle cx="19" cy="12" r="1.5" stroke="#c192f5" fill="#c192f5"/>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				  <circle cx="5" cy="18" r="1.5" stroke="#c192f5" fill="#c192f5"/>
+				  <circle cx="12" cy="18" r="1.5" stroke="#86c3eb" fill="#86c3eb"/>
+				  <circle cx="19" cy="18" r="1.5" stroke="#c192f5" fill="#c192f5"/>
 				</svg>
 			</div>
 		</div>
@@ -60,6 +61,18 @@
 		<div>NGUYEN VAN A</div>
 		<img src="./imgs/jupiter.png" />
 		<div>TRÍ TUỆ - LINH HOẠT</div>
+	</div>
+
+	<div class="overlay" id="overlay"></div>
+
+	<div class="bottom-sheet" id="bottomSheet">
+	  <div class="handle"></div>
+	  <div class="content note">
+	    <div>Ghi chú</div>
+	    <p><input type="text" value="Tiêu đề tin nhắn test" name=""></p>
+	    <p><textarea id="txtNote"></textarea>
+	    <button id="closeBtn">Close</button>
+	  </div>
 	</div>
 
   <script type="text/javascript" src="./jquery-3.5.1.min.js"></script>
