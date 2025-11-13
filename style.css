@@ -38,9 +38,10 @@ body {
   display: flex;
   flex-direction: column;
   /*! padding: 5vh 0; */
-  flex: 1;
+  /*! flex: 1; */
   justify-content: center;
   align-items: center;
+  margin-bottom: 3vh;
 }
 
 .dvText > div{
