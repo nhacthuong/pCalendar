@@ -41,7 +41,7 @@ body {
   /*! flex: 1; */
   justify-content: center;
   align-items: center;
-  margin: 3vh 0;
+  margin: 2vh 0 3vh 0;
 }
 
 .dvText > div{
@@ -54,7 +54,7 @@ body {
 }
 
 .dayOfWeek{
-  font-weight: bold;
+  font-weight: 900;
   justify-content: space-evenly;
   font-size: 6vw;
   letter-spacing: 2.5vw;
@@ -76,6 +76,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  font-weight: 400;
 }
 
 .dvPlan{
@@ -120,12 +121,12 @@ body {
 
 .card-info .dvInfo{
   flex: 1;
+  margin: 0 0 0 1.5em;
+  color: #555;
 }
 
 .card-info .dvInfo > div {
   padding: 1em 0;
-  margin: 0 0 0 1em;
-  color: #555;
 }
 
 .card-info .dvInfo > div:not(:last-child){
@@ -133,19 +134,16 @@ body {
 }
 
 .card-info .dvTools{
-  padding: 1em;
+  padding: 1.5em;
   text-align: center;
+}
+
+.card-info .dvTools > div {
+  cursor: pointer;
 }
 
 .card-info .dvTools > div:not(:last-child){
   margin-bottom: 1.2em;
-}
-
-
-.text-gradient {
-  background: linear-gradient(90deg, #c192f5, #86c3eb);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .card-info .dvTools #btnAll{
@@ -154,10 +152,17 @@ body {
 
 .card-info .dvTools #btnAll div{
   position: absolute;
-  bottom: 68%;
+  bottom: 48%;
   left: 0;
   right: 0;
   font-weight: bold;
   font-size: 0.9em;
   color: red;
+}
+
+
+.text-gradient {
+  background: linear-gradient(90deg, #c192f5, #86c3eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
