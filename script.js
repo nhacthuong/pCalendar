@@ -42,6 +42,8 @@ function setOneDay(day, month, year){
           method: "POST",
           data: {'uniqueId':uniqueId,'monthget':monthget,'action':'GET_DATA'},      
           beforeSend: function () {
+            $('#day').addClass('hidden');
+            $('#spinner').show();
           },
           success: function(res) {
             // res
@@ -60,6 +62,8 @@ function setOneDay(day, month, year){
         let keyWords = res.keyWords[ymd];
         $('.keyWord').text(keyWords.toUpperCase());
       }
+      $('#day').removeClass('hidden');
+      $('#spinner').hide();
   }
   else {
     $.ajax({
@@ -67,6 +71,8 @@ function setOneDay(day, month, year){
       method: "POST",
       data: {'uniqueId':uniqueId,'monthget':monthget,'action':'GET_DATA'},      
       beforeSend: function () {
+        $('#day').addClass('hidden');
+        $('#spinner').show();
       },
       success: function(res) {
         // res
@@ -78,6 +84,8 @@ function setOneDay(day, month, year){
         $('.person-info > div:first-child').text(res['name-vn']);
         $('.person-info > img').attr('src',`./imgs/${res.plan}.png`);
         $('.person-info > div:last-child').text(res.prikeyWords.toUpperCase());
+        $('#day').removeClass('hidden');
+        $('#spinner').hide();
       },
       error: function(xhr, status, err) {
         console.error("❌ Lỗi:", status, err);
