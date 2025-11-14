@@ -28,6 +28,8 @@ $(function(){
         // res
         localStorage.setItem("dataId", JSON.stringify(res));
         setOneDay(today.getDate(), today.getMonth(), today.getFullYear());
+        $('#day').removeClass('hidden');
+        $('#spinner').hide();
       },
       error: function(xhr, status, err) {
         console.error("❌ Lỗi:", status, err);
