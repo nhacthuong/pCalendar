@@ -296,6 +296,11 @@ body {
   border: 3px solid #fff;
 }
 
+#days-container .day-card.note-day{
+  border: 2px solid rgb(134,195,235, 1);
+  background: linear-gradient(90deg, rgb(134,195,235, 0.3), rgb(193,146,245, 0.3));
+}
+
 #month .person-info{
   flex: 1;
   align-items: flex-end;
