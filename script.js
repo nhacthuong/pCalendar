@@ -1,71 +1,21 @@
 const urlAPI = 'https://script.google.com/macros/s/AKfycbypkVn2OKUSxc9679YDerWxFtpRyNnLeA5Jirda0SD0ILhaJNTFZDz7z0sgxVH2ONnJ/exec';
 const today = new Date(); // ngày hiện tại để so sánh
 let ymd = `${today.getFullYear()}_${(today.getMonth()+1+'').padStart(2,'0')}_${(today.getDate()+'').padStart(2,'0')}`;
+let uniqueId = '251112-124325822-NVA-19911231-45678';
+let monthget = ymd.substr(0, 7);
 
 // let mon = 10; // tháng 11 (js chạy từ 0–11)
 // let yea = 2025;
 
 $(function(){
-    setOneDay(today.getDate(), today.getMonth(), today.getFullYear());
+    localStorage.clear();
 
     let mo=$('.month-info > div:first-child').text('THÁNG '+((today.getMonth()+1) < 10?'0':'') + (today.getMonth() + 1))
     let ye=$('.month-info > div:last-child').text(today.getFullYear());
 
     setInterval(updateClock, 1000);
     updateClock(); // chạy ngay khi load
-});
 
-function setOneDay(day, month, year){
-  $('.dayNumber').text((day < 10?'0':'') + day);
-  $('.monthName').text('THÁNG '+((month+1) < 10?'0':'') + (month + 1));
-  
-  const days = ["CHỦ NHẬT","THỨ HAI","THỨ BA","THỨ TƯ","THỨ NĂM","THỨ SÁU","THỨ BẢY"];
-  const dayName = days[new Date(year, month, day).getDay()];
-  $('.dayOfWeek').text(dayName);
-
-  let uniqueId = '251112-124325822-NVA-19911231-45678';
-  let date = new Date(year, month, day);
-  ymd = `${date.getFullYear()}_${(date.getMonth()+1+'').padStart(2,'0')}_${(date.getDate()+'').padStart(2,'0')}`;
-  let monthget = ymd.substr(0, 7);
-
-  let dataId = localStorage.getItem("dataId");
-  if(dataId !== null) {
-      let res = JSON.parse(dataId);
-      $('.yearKeyword').text(res.keyWordsSum.toUpperCase());
-      $('.person-info > div:first-child').text(res['name-vn']);
-      $('.person-info > img').attr('src',`./imgs/${res.plan}.png`);
-      $('.person-info > div:last-child').text(res.prikeyWords.toUpperCase());
-      //
-      if(res.keyWords[ymd] === undefined) {
-        $.ajax({
-          url: urlAPI,
-          method: "POST",
-          data: {'uniqueId':uniqueId,'monthget':monthget,'action':'GET_DATA'},      
-          beforeSend: function () {
-            $('#day').addClass('hidden');
-            $('#spinner').show();
-          },
-          success: function(res) {
-            // res
-            localStorage.setItem("dataId", JSON.stringify(res));
-            let keyWords = res.keyWords[ymd];
-            $('.keyWord').text(keyWords.toUpperCase());
-          },
-          error: function(xhr, status, err) {
-            console.error("❌ Lỗi:", status, err);
-          },
-          complete: function(xhr) {
-          }
-        });
-      }
-      else {
-        let keyWords = res.keyWords[ymd];
-        $('.keyWord').text(keyWords.toUpperCase());
-      }
-      $('#day').removeClass('hidden');
-      $('#spinner').hide();
-  }
-  else {
     $.ajax({
       url: urlAPI,
       method: "POST",
@@ -77,15 +27,7 @@ function setOneDay(day, month, year){
       success: function(res) {
         // res
         localStorage.setItem("dataId", JSON.stringify(res));
-        $('.yearKeyword').text(res.keyWordsSum.toUpperCase());
-        //
-        let keyWords = res.keyWords[ymd];
-        $('.keyWord').text(keyWords.toUpperCase());
-        $('.person-info > div:first-child').text(res['name-vn']);
-        $('.person-info > img').attr('src',`./imgs/${res.plan}.png`);
-        $('.person-info > div:last-child').text(res.prikeyWords.toUpperCase());
-        $('#day').removeClass('hidden');
-        $('#spinner').hide();
+        setOneDay(today.getDate(), today.getMonth(), today.getFullYear());
       },
       error: function(xhr, status, err) {
         console.error("❌ Lỗi:", status, err);
@@ -93,7 +35,26 @@ function setOneDay(day, month, year){
       complete: function(xhr) {
       }
     });
-  }    
+});
+
+function setOneDay(day, month, year){
+  $('.dayNumber').text((day < 10?'0':'') + day);
+  $('.monthName').text('THÁNG '+((month+1) < 10?'0':'') + (month + 1));
+  
+  const days = ["CHỦ NHẬT","THỨ HAI","THỨ BA","THỨ TƯ","THỨ NĂM","THỨ SÁU","THỨ BẢY"];
+  const dayName = days[new Date(year, month, day).getDay()];
+  $('.dayOfWeek').text(dayName);
+
+  let date = new Date(year, month, day); ymd = `${date.getFullYear()}_${(date.getMonth()+1+'').padStart(2,'0')}_${(date.getDate()+'').padStart(2,'0')}`;
+  //
+  let dataId = localStorage.getItem("dataId");
+  let res = JSON.parse(dataId);
+  $('.yearKeyword').text(res.keyWordsSum.toUpperCase());
+  $('.person-info .person-name').text(res['name-vn']);
+  $('.person-info > img').attr('src',`./imgs/${res.plan}.png`);
+  $('.person-info .person-keyword').text(res.prikeyWords.toUpperCase());
+  let keyWords = res.keyWords[ymd];
+  $('.keyWord').text(keyWords.toUpperCase());
 }
 
 function updateClock() {
