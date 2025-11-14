@@ -1,15 +1,5 @@
 const uniqueId="251112-124325822-NVA-19911231-45678";
 
-$(function(){
-  // let dayOfWeek = $('.dayOfWeek').text().split('');
-  // // .map(item => (item === "" || item === null || item === undefined ? "&nbsp;" : item));
-  // console.log(dayOfWeek);
-  // $('.dayOfWeek').html(`<div>${dayOfWeek.join('</div><div>')}</div>`);
-
-  // let keyWord = $('.keyWord').text().split('');
-  // $('.keyWord').html(`<div>${keyWord.join('</div><div>')}</div>`);
-});
-
 function updateClock() {
   const now = new Date();
   let hours = now.getHours();
@@ -27,3 +17,75 @@ function updateClock() {
 
 setInterval(updateClock, 1000);
 updateClock(); // chạy ngay khi load
+
+
+const bottomSheet = document.getElementById('bottomSheet');
+const overlay = document.getElementById('overlay');
+const closeBtn = document.getElementById('closeBtn');
+$('.openSheet').click(function(){
+  let name=$(this).attr('id').toLowerCase().replace('btn','');
+  bottomSheet.classList.add('active');
+  overlay.classList.add('active');
+  $(`.content > .${name}`).show();
+});
+
+closeBtn.addEventListener('click', () => {
+  bottomSheet.classList.remove('active');
+  overlay.classList.remove('active');
+  $(`.content > *`).hide();
+});
+
+overlay.addEventListener('click', () => {
+  bottomSheet.classList.remove('active');
+  overlay.classList.remove('active');
+  $(`.content > *`).hide();
+});
+
+let mon = 10; // tháng 11 (js chạy từ 0–11)
+let yea = 2025;
+
+$('#btnMonth').click(function(){
+  triggerHidden();
+  renderCalendar(mon, yea);
+});
+
+function renderCalendar(month, year) {
+    const today = new Date(); // ngày hiện tại để so s
+    const daysContainer = document.getElementById("days-container");
+    daysContainer.innerHTML = '';
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        // khoảng trống
+      for (let i = (firstDay + 7) % 7; i > 0; i--) {
+          const empty = document.createElement("div");
+          daysContainer.appendChild(empty);
+      }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+        const card = document.createElement("div");
+
+        // năng lượng 1–9 lặp lại
+        // const energy = (d % 9 === 0) ? 9 : d % 9;
+        let addclass='';
+         if (d === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+            card.className = "day-card choice-day";
+        }
+        else
+          card.className = "day-card";
+
+        card.innerHTML = `<div class="day-number${addclass}">${d}</div>`;
+
+        daysContainer.appendChild(card);
+    }
+}
+
+function triggerHidden() {
+  $('#day').toggle('hidden');
+  $('#month').toggle('hidden');
+}
+
+$(document).on('click', '.day-card', function() {
+  console.log(1)
+  triggerHidden();
+});
