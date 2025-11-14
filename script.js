@@ -7,6 +7,9 @@ const today = new Date(); // ngày hiện tại để so sánh
 $(function(){
     setOneDay(today.getDate(), today.getMonth(), today.getFullYear());
 
+    let mo=$('.month-info > div:first-child').text('THÁNG '+((today.getMonth()+1) < 10?'0':'') + (today.getMonth() + 1))
+    let ye=$('.month-info > div:last-child').text(today.getFullYear());
+
     setInterval(updateClock, 1000);
     updateClock(); // chạy ngay khi load
 });
