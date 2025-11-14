@@ -1,4 +1,5 @@
 /* Palette: #fae7e9, #000, #fff, #f4e4f1, #dc66de, #f89063 */
+/*background: linear-gradient(90deg, rgb(193,146,245, 1), rgb(134,195,235, 1));*/
 
 body {
   font-family: "Epilogue", sans-serif;
@@ -8,12 +9,15 @@ body {
   background-size: cover;
   background-position: center;*/
   background-repeat: no-repeat;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
-.btnNumber{
+.one-day{
+  display: flex;
+  flex-direction: column;  
+  height: 100vh;
+}
+
+.day-info{
   background-image: url('./backnumber.png');
   background-size: contain;
   background-position: center; /* căn giữa */
@@ -24,17 +28,17 @@ body {
   margin-top: 1.5vh;
 }
 
-.btnNumber .monthName {
+.day-info .monthName {
   font-size: 4vw;
   font-family: "Josefin Sans", sans-serif;
 }
 
-.btnNumber .dayNumber {
+.day-info .dayNumber {
   font-size: 15vw;
   font-weight: bold;
 }
 
-.dvText{
+.day-of-week{
   display: flex;
   flex-direction: column;
   /*! padding: 5vh 0; */
@@ -44,11 +48,11 @@ body {
   margin: 2vh 0 3vh 0;
 }
 
-.dvText > div{
+.day-of-week > div{
   display: flex;
 }
 
-.dvText > div > div{
+.day-of-week > div > div{
   flex: 1;
   text-align: center;
 }
@@ -79,7 +83,7 @@ body {
   font-weight: 400;
 }
 
-.dvPlan{
+.person-info{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,12 +91,12 @@ body {
   padding-bottom: 2vh;
 }
 
-.dvPlan > div{
+.person-info > div{
   flex: 1;
   text-align: center;
 }
 
-.dvPlan img{
+.person-info img{
   width: 10vw;
 }
 
@@ -119,38 +123,38 @@ body {
   border-radius: 10px;
 }
 
-.card-info .dvInfo{
+.card-info .note-info{
   flex: 1;
   margin: 0 0 0 1.5em;
   color: #555;
 }
 
-.card-info .dvInfo > div {
+.card-info .note-info > div {
   padding: 1em 0;
 }
 
-.card-info .dvInfo > div:not(:last-child){
+.card-info .note-info > div:not(:last-child){
   box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
 }
 
-.card-info .dvTools{
+.card-info .card-tools{
   padding: 1.5em;
   text-align: center;
 }
 
-.card-info .dvTools > div {
+.card-info .card-tools > div {
   cursor: pointer;
 }
 
-.card-info .dvTools > div:not(:last-child){
+.card-info .card-tools > div:not(:last-child){
   margin-bottom: 1.2em;
 }
 
-.card-info .dvTools #btnAll{
+.card-info .card-tools #btnAll{
   position: relative;
 }
 
-.card-info .dvTools #btnAll div{
+.card-info .card-tools #btnAll div{
   position: absolute;
   bottom: 48%;
   left: 0;
@@ -165,4 +169,98 @@ body {
   background: linear-gradient(90deg, #c192f5, #86c3eb);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.slide-div {  
+  /* hiệu ứng trượt */
+  transform: translateX(0);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  opacity: 1;
+}
+
+/* trạng thái ẩn */
+.slide-div.hidden {
+  transform: translateX(-100%); /* trượt sang trái */
+  opacity: 0;
+}
+
+#day{
+/*  display: none;*/
+}
+
+#month{
+  display: none;
+}
+
+.one-month {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  padding: 0 8vw;
+}
+
+.month-info{
+  margin: 15vh 0 6vh 0;
+}
+
+.month-info > div:first-child {
+  font-weight: 900;
+  font-size: 6vw;
+  letter-spacing: 2.5vw;
+}
+
+.month-info > div:last-child {
+  font-size: 4vw;
+  /*! margin-top: 1vh; */
+  letter-spacing: 3vw;
+}
+
+.month-details {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2vh 1vh;
+  justify-content: space-between;
+}
+
+.month-details > div {
+  flex: 1;
+  text-align: center;
+}
+
+#days-header {
+  margin-bottom: 2vh;
+  font-size: 3.5vw;
+}
+
+#days-container{
+  color: #555;
+}
+#days-container .day-card {
+  font-weight: 400;
+  aspect-ratio: 1/1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(90deg, rgb(193,146,245, 0.3), rgb(134,195,235, 0.3));
+  padding: 0.3em;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#days-container .day-card.choice-day {
+  background: linear-gradient(90deg, rgb(193,146,245, 1), rgb(134,195,235, 1));
+  outline: 3px solid #c192f5;
+  color: white !important;
+  font-weight: bold;
+  border: 3px solid #fff;
+}
+
+#month .person-info{
+  flex: 1;
+  align-items: flex-end;
+}
+
+#month .note-info{
+  margin: 0 1.5em;
 }
