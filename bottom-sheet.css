@@ -67,6 +67,7 @@ margin: 8px auto;
 	outline: none;
 	transition: all 0.3s ease;
 	border-radius: 0 !important;
+	font-size: 1.3rem;
 }
 
 .content textarea {
@@ -75,6 +76,7 @@ margin: 8px auto;
 	padding: 0.3em;
 	outline: none;
 	transition: all 0.3s ease;
+	font-size: 1.3rem;
 }
 
 .content button {
