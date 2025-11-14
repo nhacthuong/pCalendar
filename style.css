@@ -299,6 +299,7 @@ body {
 #month .person-info{
   flex: 1;
   align-items: flex-end;
+  margin: 0;
 }
 
 #month .note-info{
