@@ -1,5 +1,6 @@
-const uniqueId="251112-124325822-NVA-19911231-45678";
+const urlAPI = 'https://script.google.com/macros/s/AKfycbypkVn2OKUSxc9679YDerWxFtpRyNnLeA5Jirda0SD0ILhaJNTFZDz7z0sgxVH2ONnJ/exec';
 const today = new Date(); // ngày hiện tại để so sánh
+let ymd = `${today.getFullYear()}_${(today.getMonth()+1+'').padStart(2,'0')}_${(today.getDate()+'').padStart(2,'0')}`;
 
 // let mon = 10; // tháng 11 (js chạy từ 0–11)
 // let yea = 2025;
@@ -21,6 +22,70 @@ function setOneDay(day, month, year){
   const days = ["CHỦ NHẬT","THỨ HAI","THỨ BA","THỨ TƯ","THỨ NĂM","THỨ SÁU","THỨ BẢY"];
   const dayName = days[new Date(year, month, day).getDay()];
   $('.dayOfWeek').text(dayName);
+
+  let uniqueId = '251112-124325822-NVA-19911231-45678';
+  let date = new Date(year, month, day);
+  ymd = `${date.getFullYear()}_${(date.getMonth()+1+'').padStart(2,'0')}_${(date.getDate()+'').padStart(2,'0')}`;
+  let monthget = ymd.substr(0, 7);
+
+  let dataId = localStorage.getItem("dataId");
+  if(dataId !== null) {
+      let res = JSON.parse(dataId);
+      $('.yearKeyword').text(res.keyWordsSum.toUpperCase());
+      $('.person-info > div:first-child').text(res['name-vn']);
+      $('.person-info > img').attr('src',`./imgs/${res.plan}.png`);
+      $('.person-info > div:last-child').text(res.prikeyWords.toUpperCase());
+      //
+      if(res.keyWords[ymd] === undefined) {
+        $.ajax({
+          url: urlAPI,
+          method: "POST",
+          data: {'uniqueId':uniqueId,'monthget':monthget,'action':'GET_DATA'},      
+          beforeSend: function () {
+          },
+          success: function(res) {
+            // res
+            localStorage.setItem("dataId", JSON.stringify(res));
+            let keyWords = res.keyWords[ymd];
+            $('.keyWord').text(keyWords.toUpperCase());
+          },
+          error: function(xhr, status, err) {
+            console.error("❌ Lỗi:", status, err);
+          },
+          complete: function(xhr) {
+          }
+        });
+      }
+      else {
+        let keyWords = res.keyWords[ymd];
+        $('.keyWord').text(keyWords.toUpperCase());
+      }
+  }
+  else {
+    $.ajax({
+      url: urlAPI,
+      method: "POST",
+      data: {'uniqueId':uniqueId,'monthget':monthget,'action':'GET_DATA'},      
+      beforeSend: function () {
+      },
+      success: function(res) {
+        // res
+        localStorage.setItem("dataId", JSON.stringify(res));
+        $('.yearKeyword').text(res.keyWordsSum.toUpperCase());
+        //
+        let keyWords = res.keyWords[ymd];
+        $('.keyWord').text(keyWords.toUpperCase());
+        $('.person-info > div:first-child').text(res['name-vn']);
+        $('.person-info > img').attr('src',`./imgs/${res.plan}.png`);
+        $('.person-info > div:last-child').text(res.prikeyWords.toUpperCase());
+      },
+      error: function(xhr, status, err) {
+        console.error("❌ Lỗi:", status, err);
+      },
+      complete: function(xhr) {
+      }
+    });
+  }    
 }
 
 function updateClock() {
