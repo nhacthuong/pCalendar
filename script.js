@@ -116,18 +116,20 @@ function renderCalendar(month, year) {
       }
 
     for (let d = 1; d <= daysInMonth; d++) {
+        let addClass = 'day-card';
         const card = document.createElement("div");
 
         // năng lượng 1–9 lặp lại
         // const energy = (d % 9 === 0) ? 9 : d % 9;
-        let addclass='';
-         if (d === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
-            card.className = "day-card choice-day";
+        if (d === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+            addClass += " choice-day";
         }
-        else
-          card.className = "day-card";
+        if ([1,6,8].indexOf(d) > -1) {
+            addClass += " note-day";
+        }
+        card.className = addClass;
 
-        card.innerHTML = `<div class="day-number${addclass}">${d}</div>`;
+        card.innerHTML = `<div class="day-number">${d}</div>`;
 
         daysContainer.appendChild(card);
     }
