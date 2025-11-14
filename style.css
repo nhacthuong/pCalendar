@@ -51,7 +51,7 @@ body {
   background-position: center; /* căn giữa */
   background-repeat: no-repeat;
   text-align: center;
-  padding: 12vh 4rem;
+  padding: 8vh 4rem;
   color: white;
   margin-top: 1.5vh;
 }
@@ -157,7 +157,7 @@ body {
   align-items: center;
   font-size: 3vw;
   margin: 0 6vw 5vh 6vw;
-  flex: 1;
+  /*! flex: 1; */
   background-color: rgb(255, 255, 255, 0.3);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 10px;
