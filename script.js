@@ -1,13 +1,14 @@
 const urlAPI = 'https://script.google.com/macros/s/AKfycbypkVn2OKUSxc9679YDerWxFtpRyNnLeA5Jirda0SD0ILhaJNTFZDz7z0sgxVH2ONnJ/exec';
 const today = new Date(); // ngày hiện tại để so sánh
 let ymd = `${today.getFullYear()}_${(today.getMonth()+1+'').padStart(2,'0')}_${(today.getDate()+'').padStart(2,'0')}`;
-let uniqueId = '251112-124325822-NVA-19911231-45678';
+// /
+let url = new URL(window.location.href);
+const uniqueId = url.searchParams.get("uniqueId");
 let monthget = ymd.substr(0, 7);
 
-// let mon = 10; // tháng 11 (js chạy từ 0–11)
-// let yea = 2025;
 
 $(function(){
+
     localStorage.clear();
 
     let mo=$('.month-info > div:first-child').text('THÁNG '+((today.getMonth()+1) < 10?'0':'') + (today.getMonth() + 1))
@@ -19,13 +20,15 @@ $(function(){
     $.ajax({
       url: urlAPI,
       method: "POST",
-      data: {'uniqueId':uniqueId,'monthget':monthget,'action':'GET_DATA'},      
-      beforeSend: function () {
+      data: {'uniqueId': url.searchParams.get("uniqueId"),'monthget':monthget,'action':'GET_DATA'},      
+      beforeSend: function (req) {
         $('#day').addClass('hidden');
         $('#spinner').show();
+        // console.log(req)
       },
       success: function(res) {
         // res
+        // console.log(res)
         localStorage.setItem("dataId", JSON.stringify(res));
         setOneDay(today.getDate(), today.getMonth(), today.getFullYear());
         $('#day').removeClass('hidden');
@@ -38,6 +41,15 @@ $(function(){
       }
     });
 });
+
+function getParam(name) {
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
+    var results = regex.exec(window.location.href);
+    if (!results) return null;
+    if (!results[2]) return "";
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
 
 function setOneDay(day, month, year){
   $('.dayNumber').text((day < 10?'0':'') + day);
@@ -54,7 +66,7 @@ function setOneDay(day, month, year){
   $('.yearKeyword').text(res.keyWordsSum.toUpperCase());
   $('.person-info .person-name').text(res['name-vn']);
   $('.person-info > img').attr('src',`./imgs/${res.plan}.png`);
-  $('.person-info .person-keyword').text(res.prikeyWords.toUpperCase());
+  $('.person-info .person-keyword').text(res.plan.toUpperCase() + ' - ' + res.prikeyWords.toUpperCase());
   let keyWords = res.keyWords[ymd];
   $('.keyWord').text(keyWords.toUpperCase());
 }
