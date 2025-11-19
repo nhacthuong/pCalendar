@@ -171,6 +171,7 @@ body {
 
 .card-info .note-info > div {
   padding: 1em 0;
+  text-align: center;
 }
 
 .card-info .note-info > div:not(:last-child){
