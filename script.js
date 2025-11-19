@@ -2,6 +2,7 @@ const urlAPI = 'https://script.google.com/macros/s/AKfycbypkVn2OKUSxc9679YDerWxF
 const today = new Date(); // ngày hiện tại để so sánh
 let ymd = `${today.getFullYear()}_${(today.getMonth()+1+'').padStart(2,'0')}_${(today.getDate()+'').padStart(2,'0')}`;
 // /
+// file:///D:/_WORK/_OUT_OF_NOW/xTime/calendar_page/index.html?uniqueId=251117-093540770-LXH-19910210-02528
 let url = new URL(window.location.href);
 const uniqueId = url.searchParams.get("uniqueId");
 let monthget = ymd.substr(0, 7);
@@ -24,11 +25,13 @@ $(function(){
       beforeSend: function (req) {
         $('#day').addClass('hidden');
         $('#spinner').show();
-        // console.log(req)
+        // console.log(monthget)
+        // console.log('req',req);
       },
       success: function(res) {
+        console.log('Success');
         // res
-        // console.log(res)
+        // console.log('res',res);
         localStorage.setItem("dataId", JSON.stringify(res));
         setOneDay(today.getDate(), today.getMonth(), today.getFullYear());
         $('#day').removeClass('hidden');
@@ -69,6 +72,7 @@ function setOneDay(day, month, year){
   $('.person-info .person-keyword').text(res.plan.toUpperCase() + ' - ' + res.prikeyWords.toUpperCase());
   let keyWords = res.keyWords[ymd];
   $('.keyWord').text(keyWords.toUpperCase());
+  $('.date-slogan').text(res.dateSlogans[ymd]);
 }
 
 function updateClock() {
