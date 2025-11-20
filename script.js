@@ -183,14 +183,14 @@ $(document).on('click', '.day-card', function() {
   setOneDay(da,parseInt(mo)-1,ye);
 });
 // xem 1 ngày
-$(document).on('click', '.day-card-grids', function() {
-  console.log(1)
-  triggerHidden();
-  let da=$($(this).find('.day-number')).text();
-  let mo=$('.month-info > div.month-number').text().replace('THÁNG ', '');
-  let ye=$('.month-info > div:last-child').text();
-  setOneDay(da,parseInt(mo)-1,ye);
-});
+// $(document).on('click', '.day-card-grids', function() {
+//   console.log(1)
+//   triggerHidden();
+//   let da=$($(this).find('.day-number')).text();
+//   let mo=$('.month-info > div.month-number').text().replace('THÁNG ', '');
+//   let ye=$('.month-info > div:last-child').text();
+//   setOneDay(da,parseInt(mo)-1,ye);
+// });
 
 $('#btnMonthGrid').click(function() {
   $('.month-details').toggle('hidden');
