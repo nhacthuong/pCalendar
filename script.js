@@ -3,6 +3,8 @@ const today = new Date(); // ngày hiện tại để so sánh
 let ymd = `${today.getFullYear()}_${(today.getMonth()+1+'').padStart(2,'0')}_${(today.getDate()+'').padStart(2,'0')}`;
 // /
 // file:///D:/_WORK/_OUT_OF_NOW/xTime/calendar_page/index.html?uniqueId=251117-093540770-LXH-19910210-02528
+// https://nhacthuong.github.io/pCalendar/?uniqueId=251117-093540770-LXH-19910210-02528
+// https://nhacthuong.github.io/pCalendar/?uniqueId=251117-093021516-LNHT-19911207-68931
 let url = new URL(window.location.href);
 const uniqueId = url.searchParams.get("uniqueId");
 let monthget = ymd.substr(0, 7);
@@ -17,30 +19,40 @@ $(function(){
 
     setInterval(updateClock, 1000);
     updateClock(); // chạy ngay khi load
+    //
+    // Tạo query string
+    const q = new URLSearchParams({
+      uniqueId: url.searchParams.get("uniqueId"),
+      monthget: monthget,
+      action: "GET_DATA"
+    }).toString();
 
+    const t0 = performance.now();
+    // Gọi GET
     $.ajax({
-      url: urlAPI,
-      method: "POST",
-      data: {'uniqueId': url.searchParams.get("uniqueId"),'monthget':monthget,'action':'GET_DATA'},      
+      url: urlAPI + "?" + q,
+      method: "GET",      
       beforeSend: function (req) {
         $('#day').addClass('hidden');
         $('#spinner').show();
         // console.log(monthget)
-        // console.log('req',req);
+        console.log('req',req);
       },
-      success: function(res) {
-        console.log('Success');
-        // res
-        // console.log('res',res);
+      success: function (res) {
+        console.log("Success");
         localStorage.setItem("dataId", JSON.stringify(res));
+
         setOneDay(today.getDate(), today.getMonth(), today.getFullYear());
+
         $('#day').removeClass('hidden');
         $('#spinner').hide();
+        //
+        const t1 = performance.now();
+        console.log("⚡ Thời gian AJAX:", ((t1 - t0) / 1000).toFixed(3), "s");
       },
-      error: function(xhr, status, err) {
+
+      error: function (xhr, status, err) {
         console.error("❌ Lỗi:", status, err);
-      },
-      complete: function(xhr) {
       }
     });
 });
