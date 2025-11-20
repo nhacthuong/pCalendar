@@ -67,14 +67,81 @@
 		<!-- LỊCH TỪNG THÁNG -->
 		<div id="month" class="slide-div">
 			<div class="one-month">
-				<div class="month-info">
-					<div></div>
-					<div></div>
+				<div class="month-container">
+					<div class="month-info">
+						<div class="month-number"></div>
+						<div></div>
+					</div>
+					<div class="change-style">
+						<button id="btnMonthGrid" class="calendar-button month-details">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 80" width="40" height="40">
+							  <defs>
+							    <linearGradient id="gradCard" x1="0%" y1="0%" x2="0%" y2="100%">
+							      <stop offset="0%" style="stop-color:rgb(193,146,245);stop-opacity:1" />
+							      <stop offset="100%" style="stop-color:rgb(134,195,235);stop-opacity:1" />
+							    </linearGradient>
+							  </defs>
+
+							  <!-- Khung card -->
+							  <rect x="5" y="15" width="50" height="55" rx="6" ry="6" stroke="url(#gradCard)" stroke-width="2" fill="none"/>
+
+							  <!-- 3 nhánh treo mảnh -->
+							  <line x1="15" y1="5" x2="15" y2="15" stroke="url(#gradCard)" stroke-width="1.5" stroke-linecap="round"/>
+							  <line x1="30" y1="5" x2="30" y2="15" stroke="url(#gradCard)" stroke-width="1.5" stroke-linecap="round"/>
+							  <line x1="45" y1="5" x2="45" y2="15" stroke="url(#gradCard)" stroke-width="1.5" stroke-linecap="round"/>
+
+							  <!-- 2 gạch dọc trong dòng trống, vượt ra ngoài khung -->
+							  <line x1="20" y1="15" x2="20" y2="10" stroke="url(#gradCard)" stroke-width="1.5" stroke-linecap="round"/>
+							  <line x1="40" y1="15" x2="40" y2="10" stroke="url(#gradCard)" stroke-width="1.5" stroke-linecap="round"/>
+
+							  <!-- Khoảng trống bên trên chữ A -->
+							  <!-- Chữ A -->
+							  <text class="txtName" x="30" y="33" font-size="20" font-weight="bold" text-anchor="middle" fill="url(#gradCard)">A</text>
+
+							  <!-- 3 dòng ngày -->
+							  <g fill="url(#gradCard)">
+							    <rect x="10" y="37" width="40" height="6" rx="1"/>
+							    <rect x="10" y="47" width="40" height="6" rx="1"/>
+							    <rect x="10" y="57" width="40" height="6" rx="1"/>
+							  </g>
+							</svg>
+						</button>
+						<button id="btnMonthCircle" class="calendar-button month-grids">
+							<svg width="35" height="40" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+							  <defs>
+							    <linearGradient id="gradCard2" x1="0%" y1="0%" x2="0%" y2="100%">
+							      <stop offset="0%" style="stop-color:rgb(193,146,245);stop-opacity:1" />
+							      <stop offset="100%" style="stop-color:rgb(134,195,235);stop-opacity:1" />
+							    </linearGradient>
+							  </defs>
+
+							  <!-- Khung vuông bo góc -->
+							  <rect x="5" y="5" width="50" height="55" rx="10" fill="url(#gradCard2)" />
+
+							  <!-- HÀNG 1 -->
+							  <circle cx="18" cy="18" r="4" fill="white" stroke="rgba(0,0,0,0.25)" stroke-width="1.2"/>
+							  <circle cx="30" cy="18" r="4" fill="white" stroke="rgba(0,0,0,0.25)" stroke-width="1.2"/>
+							  <circle cx="42" cy="18" r="4" fill="white" stroke="rgba(0,0,0,0.25)" stroke-width="1.2"/>
+
+							  <!-- HÀNG 2 -->
+							  <circle cx="18" cy="26" r="4" fill="white" stroke="rgba(0,0,0,0.25)" stroke-width="1.2"/>
+							  <circle cx="30" cy="26" r="4" fill="white" stroke="rgba(0,0,0,0.25)" stroke-width="1.2"/>
+							  <circle cx="42" cy="26" r="4" fill="white" stroke="rgba(0,0,0,0.25)" stroke-width="1.2"/>
+
+							  <!-- CHỮ A -->
+							  <text class="txtName" x="30" y="50" font-size="20" font-weight="bold" text-anchor="middle" fill="white">A</text>
+
+							</svg>
+						</button>
+					</div>
 				</div>
 				<div class="month-details" id="days-header">			
 					<div>CN</div><div>T2</div><div>T3</div><div>T4</div><div>T5</div><div>T6</div><div>T7</div>
 				</div>
 				<div class="month-details" id="days-container"></div>
+				<div class="month-grids">
+					<div id="days-grids"></div>
+				</div>
 			</div>
 		</div>
 	</div>
