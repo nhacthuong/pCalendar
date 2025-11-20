@@ -72,6 +72,7 @@ body {
   justify-content: center;
   align-items: center;
   margin: 2vh 0 3vh 0;
+  color: #483D8B;
 }
 
 .day-of-week > div{
@@ -87,21 +88,21 @@ body {
   font-weight: 900;
   justify-content: space-evenly;
   font-size: 6vw;
-  letter-spacing: 2.5vw;
+  letter-spacing: 2vw;
 }
 
 .keyWord{
   text-align: center;
-  font-size: 3vw;
+  font-size: 3.5vw;
   margin-top: 1vh;
   justify-content: space-evenly;
-  letter-spacing: 4vw;
+  letter-spacing: 3vw;
 }
 
 .yearKeyword{
-  font-size: 2.5vw;
+  font-size: 3.6vw;
   text-align: center;
-  /*! margin-top: 2vh; */
+  margin-top: 2vh;
   /*! flex: 1; */
   display: flex;
   flex-direction: column;
@@ -155,7 +156,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3vw;
+  font-size: 3.6vw;
   margin: 0 6vw 5vh 6vw;
   /*! flex: 1; */
   background-color: rgb(255, 255, 255, 0.3);
@@ -165,13 +166,15 @@ body {
 
 .card-info .note-info{
   flex: 1;
-  margin: 0 0 0 1.5em;
+  /*! margin: 0 0 0 1.5em; */
   color: #555;
+  margin-left: 0.5em;
 }
 
 .card-info .note-info > div {
-  padding: 1em 0;
-  text-align: center;
+  /*! padding: 1em 0; */
+  /*! text-align: center; */
+  margin-left: 0.8em;
 }
 
 .card-info .note-info > div:not(:last-child){
@@ -179,12 +182,14 @@ body {
 }
 
 .card-info .card-tools{
-  padding: 1.5em;
+  padding: 0.5em;
   text-align: center;
 }
 
 .card-info .card-tools > div {
   cursor: pointer;
+  /*! border-left: 1px dashed #4B0082; */
+  padding: 0.8em;
 }
 
 .card-info .card-tools > div:not(:last-child){
