@@ -261,6 +261,7 @@ height: 100%;
 
 .month-info{
   margin: 15vh 0 6vh 0;
+  flex: 1;
 }
 
 .month-info > div:first-child {
@@ -295,7 +296,7 @@ height: 100%;
 #days-header {
   margin-bottom: 2vh;
   font-size: 3.5vw;
-  font-weight: 600;
+  font-weight: 500;
   color: #333;
 }
 
@@ -324,5 +325,113 @@ height: 100%;
 
 #days-container .day-card.note-day{
   border: 2px solid rgb(134,195,235, 1);
-  background: linear-gradient(90deg, rgb(134,195,235, 0.3), rgb(193,146,245, 0.3));
+  background: linear-gradient(90deg, rgb(134,195,235, 0.8), rgb(193,146,245, 0.8));
+}
+
+.change-style {
+  display: flex;
+  justify-content: center;
+  margin: 15vh 0 6vh 0;
+}
+
+.calendar-button {
+  /* Thiết lập kích thước và hình dạng */
+  width: 50px; /* Hoặc kích thước tùy ý */
+  height: 50px;
+  border-radius: 50%; /* Làm cho button tròn */
+  display: flex;
+
+  /* Màu nền và viền */
+  background: rgba(255, 255, 255, 0.2); /* Nền trắng hơi trong suốt */
+  border: none;
+  
+  /* Font chữ và màu chữ */
+  color: #333333; /* Màu chữ tối, có thể điều chỉnh */
+  font-family: Arial, sans-serif; /* Hoặc font chữ phù hợp với design */
+  font-size: 16px;
+  font-weight: 500; /* Có thể làm đậm hơn nếu cần */
+  
+  /* Căn giữa số */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* Hiệu ứng Mờ (Blur/Glassmorphism nhẹ) và Shadow */
+  backdrop-filter: blur(5px); /* Hiệu ứng mờ nền */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), /* Shadow nhẹ bên dưới */
+              0 0 10px rgba(255, 255, 255, 0.5) inset; /* Ánh sáng mờ bên trong */
+  
+  /* Hiệu ứng chuyển động mượt mà */
+  transition: all 0.3s ease;
+  
+  /* Đảm bảo con trỏ chuột là pointer */
+  cursor: pointer;
+}
+
+/* 🟢 Hiệu ứng Hover (Khi di chuột qua) - Màu Tím Nhạt/Xanh Nhạt */
+.calendar-button:hover {
+  background: rgba(190, 200, 255, 0.4); /* Nền hơi tím/xanh nhạt hơn */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15),
+              0 0 15px rgba(255, 255, 255, 0.7) inset;
+  transform: translateY(-2px); /* Nhấc nhẹ button lên */
+}
+
+/* 🔵 Hiệu ứng Active (Khi click) - Mô phỏng ngày được chọn (Ví dụ ngày 20) */
+.calendar-button.active,
+.calendar-button:active {
+  background: linear-gradient(135deg, rgb(193,146,245, 0.6), rgb(134,195,235, 0.6)); /* Gradient màu tím/xanh nổi bật */
+  color: #ffffff; /* Chữ trắng */
+  box-shadow: 0 0 15px rgba(163, 195, 255, 0.8); /* Glow nhẹ xung quanh */
+  transform: translateY(0); /* Đặt button về vị trí cũ */
+}
+
+.month-grids{
+  display: none;
+  flex: 1;
+}
+
+#days-grids{
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: 60vh;
+}
+
+.month-container{
+  display: flex;
+  align-items: center;
+}
+
+#days-grids .day-card-grids {
+  display: flex;
+  font-size: 3.6vw;
+  border-radius: 8px;
+  margin: 0 1em;
+  cursor: pointer;
+}
+#days-grids .day-card-grids.note-day {
+  border: 1px solid rgb(134,195,235, 1);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+#days-grids .day-card-grids:not(#days-grids .day-card-grids.note-day, #days-grids .day-card-grids.choice-day) {
+  border: 1px dashed #c192f5;
+}
+#days-grids .day-card-grids.choice-day {
+  background: linear-gradient(90deg, rgb(193,146,245, 1), rgb(134,195,235, 1));
+  outline: 2px solid #c192f5;
+  color: white !important;
+  font-weight: bold;
+  border: 2px solid #fff;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+#days-grids .day-card-grids:not(:last-child) {
+  margin-bottom: 0.5vh;
+}
+#days-grids .day-card-grids .day-number {
+  padding: 0.5em 1em;
+  text-align: center;
+  font-weight: bold;
+}
+#days-grids .day-card-grids .date-slogan {
+  padding: 0.5em 1em 0.5em 0;
 }
