@@ -44,6 +44,10 @@ $(function(){
 
         setOneDay(today.getDate(), today.getMonth(), today.getFullYear());
 
+        $('.person-info .person-name').text(res['name-vn']);
+        $('.person-info > img').attr('src',`./imgs/${res.plan}.png`);
+        $('.person-info .person-keyword').text(res.plan.toUpperCase() + ' - ' + res.prikeyWords.toUpperCase());
+
         $('#day').removeClass('hidden');
         $('#spinner').hide();
         //
@@ -79,9 +83,6 @@ function setOneDay(day, month, year){
   let dataId = localStorage.getItem("dataId");
   let res = JSON.parse(dataId);
   $('.yearKeyword').text(res.keyWordsSum.toUpperCase());
-  $('.person-info .person-name').text(res['name-vn']);
-  $('.person-info > img').attr('src',`./imgs/${res.plan}.png`);
-  $('.person-info .person-keyword').text(res.plan.toUpperCase() + ' - ' + res.prikeyWords.toUpperCase());
   let keyWords = res.keyWords[ymd];
   $('.keyWord').text(keyWords.toUpperCase());
   $('.date-slogan').text(res.dateSlogans[ymd]);
