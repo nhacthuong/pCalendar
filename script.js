@@ -12,7 +12,7 @@ let monthget = ymd.substr(0, 7);
 
 $(function(){
 
-    localStorage.clear();
+    // localStorage.clear();
 
     let mo=$('.month-info > div:first-child').text('THÁNG '+((today.getMonth()+1) < 10?'0':'') + (today.getMonth() + 1))
     let ye=$('.month-info > div:last-child').text(today.getFullYear());
@@ -28,15 +28,12 @@ $(function(){
     }).toString();
 
     const t0 = performance.now();
-    // Gọi GET
     $.ajax({
       url: urlAPI + "?" + q,
       method: "GET",      
       beforeSend: function (req) {
         $('#day').addClass('hidden');
         $('#spinner').show();
-        // console.log(monthget)
-        // console.log('req',req);
       },
       success: function (res) {
         console.log("Success");
@@ -45,6 +42,9 @@ $(function(){
         setOneDay(today.getDate(), today.getMonth(), today.getFullYear());
 
         $('#day').removeClass('hidden');
+
+        // $('#btnMonth').click();
+
         $('#spinner').hide();
         //
         const t1 = performance.now();
@@ -79,6 +79,10 @@ function setOneDay(day, month, year){
   let dataId = localStorage.getItem("dataId");
   let res = JSON.parse(dataId);
   $('.yearKeyword').text(res.keyWordsSum.toUpperCase());
+
+  let rname =res['name-vn'].split(' ');
+  $('.txtName').text(rname[rname.length - 1].split('')[0]);
+
   $('.person-info .person-name').text(res['name-vn']);
   $('.person-info > img').attr('src',`./imgs/${res.plan}.png`);
   $('.person-info .person-keyword').text(res.plan.toUpperCase() + ' - ' + res.prikeyWords.toUpperCase());
@@ -128,10 +132,10 @@ overlay.addEventListener('click', () => {
 // xem fill tháng
 $('#btnMonth').click(function(){
   triggerHidden();
-  renderCalendar(today.getMonth(), today.getFullYear());
+  renderCalendar(today.getMonth(), today.getFullYear(), $('.dayNumber').text());
 });
 
-function renderCalendar(month, year) {
+function renderCalendar(month, year, day="") {
     const daysContainer = document.getElementById("days-container");
     daysContainer.innerHTML = '';
     const firstDay = new Date(year, month, 1).getDay();
@@ -149,9 +153,11 @@ function renderCalendar(month, year) {
 
         // năng lượng 1–9 lặp lại
         // const energy = (d % 9 === 0) ? 9 : d % 9;
-        if (d === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
-            addClass += " choice-day";
-        }
+        // if(day === ""){
+        //   if (d === today.getDate() && month === today.getMonth() && year === today.getFullYear()) addClass += " choice-day";
+        // }
+        if (d===parseInt(day)) addClass += " choice-day";
+        if(d<parseInt(day)) addClass += " note-day";
         // if ([1,6,8].indexOf(d) > -1) {
         //     addClass += " note-day";
         // }
@@ -172,7 +178,60 @@ function triggerHidden() {
 $(document).on('click', '.day-card', function() {
   triggerHidden();
   let da=$(this).text();
-  let mo=$('.month-info > div:first-child').text().replace('THÁNG ', '');
+  let mo=$('.month-info > div.month-number').text().replace('THÁNG ', '');
   let ye=$('.month-info > div:last-child').text();
   setOneDay(da,parseInt(mo)-1,ye);
 });
+// xem 1 ngày
+$(document).on('click', '.day-card-grids', function() {
+  console.log(1)
+  triggerHidden();
+  let da=$($(this).find('.day-number')).text();
+  let mo=$('.month-info > div.month-number').text().replace('THÁNG ', '');
+  let ye=$('.month-info > div:last-child').text();
+  setOneDay(da,parseInt(mo)-1,ye);
+});
+
+$('#btnMonthGrid').click(function() {
+  $('.month-details').toggle('hidden');
+  $('.month-grids').toggle('hidden');  
+  renderCalendarGrid(today.getMonth(), today.getFullYear(), $('.dayNumber').text());
+});
+$('#btnMonthCircle').click(function() {
+  $('.month-details').toggle('hidden');  
+  $('.month-grids').toggle('hidden');
+});
+
+function renderCalendarGrid(month, year, day="") {
+    const daysContainer = document.getElementById("days-grids");
+    daysContainer.innerHTML = '';
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    for (let d = 1; d <= daysInMonth; d++) {
+        let addClass = 'day-card-grids';
+        const card = document.createElement("div");
+
+        // năng lượng 1–9 lặp lại
+        // const energy = (d % 9 === 0) ? 9 : d % 9;
+        // if(day === ""){
+        //   if (d === today.getDate() && month === today.getMonth() && year === today.getFullYear()) addClass += " choice-day";
+        // }
+        if (d===parseInt(day)) addClass += " choice-day";
+        if(d<parseInt(day)) addClass += " note-day";
+        // if ([1,6,8].indexOf(d) > -1) {
+        //     addClass += " note-day";
+        // }
+        card.className = addClass;
+        
+        let date = new Date(year, month, d); ymd = `${date.getFullYear()}_${(date.getMonth()+1+'').padStart(2,'0')}_${(date.getDate()+'').padStart(2,'0')}`;
+        let dataId = localStorage.getItem("dataId");
+        let res = JSON.parse(dataId);
+        card.innerHTML = `<div class="day-number">${d}</div><div class="date-slogan">${res.dateSlogans[ymd]}</div>`;
+
+        daysContainer.appendChild(card);
+    }
+    $('#days-grids').animate({
+        scrollTop: $('#days-grids .day-card-grids.choice-day').offset().top - $('#days-grids').offset().top - 10 + $('#days-grids').scrollTop()
+    }, 800);
+}
