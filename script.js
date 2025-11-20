@@ -152,9 +152,9 @@ function renderCalendar(month, year) {
         if (d === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
             addClass += " choice-day";
         }
-        if ([1,6,8].indexOf(d) > -1) {
-            addClass += " note-day";
-        }
+        // if ([1,6,8].indexOf(d) > -1) {
+        //     addClass += " note-day";
+        // }
         card.className = addClass;
 
         card.innerHTML = `<div class="day-number">${d}</div>`;
