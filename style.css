@@ -87,13 +87,13 @@ body {
 .dayOfWeek{
   font-weight: 900;
   justify-content: space-evenly;
-  font-size: 6vw;
+  font-size: 5.7vw;
   letter-spacing: 2vw;
 }
 
 .keyWord{
   text-align: center;
-  font-size: 3.5vw;
+  font-size: 3.3vw;
   margin-top: 1vh;
   justify-content: space-evenly;
   letter-spacing: 3vw;
@@ -162,7 +162,7 @@ body {
   margin: 0 6vw 5vh 6vw;
   /*! flex: 1; */
   background-color: rgb(255, 255, 255, 0.3);
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 5px 6px;
   border-radius: 10px;
 }
 
