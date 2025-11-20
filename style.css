@@ -264,15 +264,20 @@ height: 100%;
 }
 
 .month-info > div:first-child {
-  font-weight: 900;
-  font-size: 6vw;
-  letter-spacing: 2.5vw;
+  font-weight: 600;
+  font-size: 7vw;
+  letter-spacing: 2vw;
+  color: #333;
 }
 
 .month-info > div:last-child {
-  font-size: 4vw;
+  font-size: 5vw;
   /*! margin-top: 1vh; */
-  letter-spacing: 3vw;
+  letter-spacing: 2vw;
+  font-weight: 900;
+  color: #483D8B;
+  font-family: "Epilogue", sans-serif;
+  padding-left: 1vw;
 }
 
 .month-details {
@@ -290,6 +295,8 @@ height: 100%;
 #days-header {
   margin-bottom: 2vh;
   font-size: 3.5vw;
+  font-weight: 600;
+  color: #333;
 }
 
 #days-container{
