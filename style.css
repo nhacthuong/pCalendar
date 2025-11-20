@@ -108,6 +108,7 @@ body {
   flex-direction: column;
   justify-content: center;
   font-weight: 400;
+  color: #333;
 }
 
 .person-info{
