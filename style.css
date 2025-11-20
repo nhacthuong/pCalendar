@@ -217,7 +217,7 @@ height: 100%;
 
 
 .text-gradient {
-  background: linear-gradient(90deg, #c192f5, #86c3eb);
+  background: linear-gradient(90deg, #9381FF, #6AC5F9);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
