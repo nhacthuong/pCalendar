@@ -36,7 +36,7 @@ $(function(){
         $('#day').addClass('hidden');
         $('#spinner').show();
         // console.log(monthget)
-        console.log('req',req);
+        // console.log('req',req);
       },
       success: function (res) {
         console.log("Success");
