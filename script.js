@@ -12,7 +12,7 @@ let monthget = ymd.substr(0, 7);
 
 $(function(){
 
-    localStorage.clear();
+    // localStorage.clear();
 
     let mo=$('.month-info > div:first-child').text('THÁNG '+((today.getMonth()+1) < 10?'0':'') + (today.getMonth() + 1))
     let ye=$('.month-info > div:last-child').text(today.getFullYear());
@@ -235,3 +235,4 @@ function renderCalendarGrid(month, year, day="") {
         scrollTop: $('#days-grids .day-card-grids.choice-day').offset().top - $('#days-grids').offset().top - 10 + $('#days-grids').scrollTop()
     }, 800);
 }
+
