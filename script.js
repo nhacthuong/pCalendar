@@ -204,3 +204,35 @@ $('#btnMonthCircle').click(function () {
     $('.month-details').removeClass('hidden');
     $('.month-grids').addClass('hidden');
 });
+
+let deferredPrompt;
+const btnInstall = document.getElementById('btnInstall');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Ngăn chặn trình duyệt tự động hiển thị prompt
+    e.preventDefault();
+    // Lưu sự kiện lại để kích hoạt sau
+    deferredPrompt = e;
+    // Hiển thị nút cài đặt của mình
+    btnInstall.classList.remove('hidden');
+});
+
+btnInstall.addEventListener('click', async () => {
+    if (deferredPrompt) {
+        // Hiển thị hộp thoại cài đặt của trình duyệt
+        deferredPrompt.prompt();
+        // Chờ người dùng trả lời
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`User response to the install prompt: ${outcome}`);
+        // Xóa prompt đã dùng
+        deferredPrompt = null;
+        // Ẩn nút sau khi bấm
+        btnInstall.classList.add('hidden');
+    }
+});
+
+// Ẩn nút nếu ứng dụng đã được cài đặt thành công
+window.addEventListener('appinstalled', () => {
+    console.log('App was installed.');
+    btnInstall.classList.add('hidden');
+});
